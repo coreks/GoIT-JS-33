@@ -1,295 +1,309 @@
-// ------ Переменные и ветвления ---------
+// Модуль 2. Занятие 1. Массивы и функции
 
-// 1. С помощью оператора определения типа убедитесь,
-// что переменные принадлежат
-// типам: string, number, boolean.
+// Задача 1
 
-const productName = "Mango";
-const pricePerItem = 150;
-const isOnSale = false;
-const error = null;
-let quantity;
+// 1. Создайте массив styles с элементами «Джаз» и «Блюз».
+// 2. Добавьте «Рок-н-ролл» в конец.
+// 3. Замените значение «Блюз» на «Классика».
+// 4. Удалите первый элемент и выведите его в консоль.
+// 5. Вставьте «Рэп» и «Регги» в начало массива.
 
-// console.log(typeof productName);
-// console.log(typeof pricePerItem);
-// console.log(typeof isOnSale);
-// console.log(typeof error);
-// console.log(typeof quantity);
+// Массив по ходу выполнения операций:
 
-// 2. Вывести на экран сумму:
-// количество яблок + количество винограда.
+// a. Джаз, Блюз
+// b. Джаз, Блюз, Рок-н-ролл
+// c. Джаз, Классика, Рок-н-ролл
+// d. Классика, Рок-н-ролл
+// e.Рэп, Регги, Классика, Рок - н - ролл;
 
-const apples = 47;
-const grapes = 135;
+// const styles = ["Джаз", "Блюз"];
 
-// const result2 = apples + grapes;
+// styles.push("Рок-н-ролл");
 
-// console.log(result2);
+// console.log(styles);
 
-// 3. Создать переменную result,
-// присвоить ей выражение 108+223-2*5,
-// разобрать приоритет и вывести её значение в консоль.
+// styles.splice(1, 1, "Классика");
 
-let result1 = 108 + (223 - 2) * 5;
+// console.log(styles);
 
-// console.log(result1);
+// const deletedElem = styles.shift();
 
-// 4. Определить площадь круга с радиусом 10см
+// console.log(deletedElem);
 
-let radius = 10;
+// console.log(styles);
 
-// const sqr = Math.PI * Math.pow(radius, 2);
+// styles.unshift("Рэп", "Регги");
 
-// console.log(sqr);
+// console.log(styles);
 
-// 5. Написать фразу с помощью шаблонных
-// строк Здравствуйте, меня зовут А, мне Б лет и
-// мне нравится Ц, где А, Б, Ц -
-// переменные вставленные в строку.
+// --------------------
 
-// const name1 = "Ашот";
-// const age1 = 28;
-// const hobby1 = "футбол";
+// Задача 2
 
-// const result2 = `Здравствуйте, меня зовут ${name1},
-// мне ${age1} лет и мне нравится ${hobby1}`;
+// Напишите функцию min(a,b), которая возвращает
+// меньшее из чисел a и b.
 
-// console.log(result2);
+// function min(a, b) {
+//   if (typeof a !== "number" || typeof b !== "number") {
+//     return "Аргументы должны быть цифрами!";
+//   }
 
-// 6. Каким будет результат этих выражений?
-
-// 'g'.charCodeAt(0);
-
-// console.log(5 > 4);
-// console.log(10 >= "7");
-// console.log("2" > "12");
-// console.log("2" < "12");
-// console.log("4" == 4);
-// console.log("6" === 6);
-// console.log("false" === false);
-// console.log(1 == true);
-// console.log(1 === true);
-// console.log("0" == false);
-// console.log("0" === false);
-// console.log("Ёнанас" < "ёжик");
-// console.log("Ёнанас" === "ёжик");
-// console.log(undefined == null);
-// console.log(undefined === null);
-
-// 7. Используя конструкцию if..else,
-// напишите код, который будет спрашивать:
-// «Какое «официальное» название JavaScript?».
-// Если пользователь вводит «ECMAScript»,
-// то показать: «Верно!», в противном случае – отобразить:
-// «Не знаете? ECMAScript!»
-
-// const question = prompt("Какое «официальное» название JavaScript?");
-
-// if (question === "ECMAScript") {
-//   console.log("Верно!");
-// } else {
-//   console.log("Не знаете? ECMAScript!");
+//   return a > b ? b : a;
 // }
 
-// 8. Перепишите if...else с использованием
-// тернарного оператора.
+// console.log(min(10, 7));
 
-// const a = 1;
-// const b = 5;
-// let result;
+// --------------------
 
-// if (a + b < 4) {
-//   result = "Мало";
-// } else {
-//   result = "Много";
-// }
+// Задача 3
 
-// a + b < 4 ? (result = "Мало") : (result = "Много");
+// Напишите функцию logItems(array), которая получает
+// массив и использует цикл for,
+// который для каждого элемента массива будет выводить
+// в консоль сообщение в формате
+// <номер элемента> - <значение элемента>.
+// Нумерация элементов должна начинаться с 1.
 
-// console.log(result);
+// Например для первого элемента массива
+// ['Mango', 'Poly', 'Ajax'] с индексом
+// 0 будет выведено 1 - Mango, а для индекса 2 выведет 3 - Ajax.
 
-// 9. Что выведет код?
+// const arr = ["Mango", "Poly", "Ajax"];
 
-// console.log(true && 3);
-
-// console.log(false && 3);
-
-// console.log(true && 4 && "hello");
-
-// console.log(true && 0 && "hello");
-
-// console.log(true || 3);
-
-// console.log(true || 3 || 4);
-
-// console.log(true || false || 7);
-
-// console.log(null || 2 || undefined);
-
-// console.log((1 && null && 2) > 0);
-
-// console.log(null || (2 && 3) || 4);
-
-// 10. Напишите условие if для проверки,
-// что переменная age находится в диапазоне между
-// 14 и 90 включительно.
-
-// const min = 14;
-// const max = 90;
-// let age = 14;
-
-// if (age >= min && age <= max) {
-//   console.log("Верно");
-// } else {
-//   console.log("Не верно");
-// }
-
-// 11. Написать программу которая получит от
-// пользователя число (количество минут) и выведёт
-// на экран строку в формате часов и минут.
-
-// пример - 70 покажет 01:10
-
-// const globalMinutes = 61;
-
-// const hours = Math.floor(globalMinutes / 60);
-
-// const modifiedHours = String(hours).padStart(2, 0);
-
-// const minutes = globalMinutes % 60;
-
-// const modifiedMinutes = String(minutes).padStart(2, 0);
-
-// const time = `${modifiedHours}:${modifiedMinutes}`;
-
-// console.log(time);
-
-// -------- Циклы ---------
-
-// 1. Напишите цикл for который выводит в консоль
-// браузера числа по возрастанию от min до max.
-
-const min1 = 10;
-const max1 = 100;
-
-// i++ i+=1 i-- i-=1
-
-for (let i = min1; i <= max1; i++) {
-  //   console.log(i);
-}
-
-// 2. Напишите цикл for который выводит в
-// консоль браузера числа по убыванию от max до min.
-
-for (let i = max1; i >= min1; i--) {
-  //   console.log(i);
-}
-
-// 3. При помощи цикла for выведите чётные
-// числа от 2 до 10.
-
-const num1 = 2;
-const num2 = 10;
-
-// for (let i = num1; i <= num2; i++) {
-//   if (i % 2 === 0) {
-//     console.log(i);
+// function logItems(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     console.log(`${i + 1} - ${arr[i]}`);
 //   }
 // }
 
-// for (let i = num1; i <= num2; i += 2) {
-//   console.log(i);
-// }
+// logItems(arr);
 
-// 4. Напишите цикл, который предлагает ввести
-// число больше 100 через prompt.
-// Если посетитель ввёл другое
-// число - попросить ввести ещё раз, и так далее.
-// Цикл должен спрашивать число пока посетитель не
-// введёт число, большее 100, либо не нажмёт кнопку
-// Отмена в промпт.
+// --------------------
 
-// let input = prompt("Введите число больше 100");
-// let check = false;
+// Задача 4
 
-// do {
-//   if (Number(input) < 100) {
-//     check = true;
-//     input = prompt("Введите число больше 100");
-//   } else {
-//     check = false;
-//   }
-// } while (check);
+// Вернуть отсортированную копию по алфавиту
+// (не меняя исходный массив)
+// не использовать Array.prototype.sort()
 
-// 5*. Напишите код, который будет спрашивать
-// логин с помощью prompt и логировать результат
-// в консоль браузера.
+const ex4 = [2, 1, 65];
 
-// Если посетитель вводит «Админ»,
-// то prompt запрашивает пароль
-// Если ничего не введено или нажата
-// клавиша Esc – вывести строку «Отменено»
-// В противном случае вывести строку «Я вас не знаю»
-// Пароль проверять так:
-
-// Если введён пароль «Я главный»,
-// то вывести строку «Здравствуйте!»
-// Иначе выводить строку «Неверный пароль»
-
-// переписать на switch case
-// вложенные проверки переписать на тернар
-
-// const loginInput = prompt("Введите свой логин");
-
-// if (loginInput === "Админ") {
-//   const passwordInput = prompt("Введите свой пароль");
-//   if (passwordInput) {
-//     if (passwordInput === "Я главный") {
-//       console.log("Здравствуйте!");
-//     } else {
-//       console.log("Неверный пароль");
+// function bubbleSort(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = 0; j < arr.length; j++) {
+//       if (arr[j] > arr[j + 1]) {
+//         let tmp = arr[j];
+//         arr[j] = arr[j + 1];
+//         arr[j + 1] = tmp;
+//       }
 //     }
-//   } else {
-//     console.log("Отменено");
 //   }
-// } else {
-//   console.log("Я вас не знаю");
+
+//   return arr;
 // }
 
-// 6. Напиши скрипт который просит
-// посетителя ввести число в prompt до тех пор,
-// пока посетитель на нажмет Cancel,
-//  и каждый раз добавляет введенное значение
-// к общей сумме.
+// console.log(bubbleSort(ex4));
 
-// При загрузке страницы пользователю предлагается
-// в prompt ввести число. Ввод добавляется к значению
-// переменной total.
-// Операция ввода числа продолжается
-// до тех пор, пока пользователь не нажмет кнопку
-// Cancel в prompt.
-// После того как пользователь прекратил ввод нажав
-//  кнопку Cancel, показать alert со строкой
-// 'Общая сумма чисел равна [сумма]'.
-// Делать проверку того, что пользователь ввел
-// именно число, а не произвольный набор символов,
-// не нужно.
+// --------------------
 
-// let inputValue = prompt("Введите число");
-// let check = false;
-// let total = 0;
+// Задача 5
 
-// do {
-//   if (inputValue) {
-//     check = true;
-//     total += Number(inputValue);
-//     inputValue = prompt("Введите число");
-//   } else {
-//     check = false;
-//     alert(`Общая сумма чисел равна ${total}`);
+// Напиши функцию findSmallestNumber(numbers)которая
+// ищет самое маленькое число в массиве.
+
+// ДЗ - Посмотреть как можно валидировать массив
+
+const ex5 = [104, 67, 54, 89, 2, 19];
+
+function findSmallestNumber(numbers) {
+  let min = numbers[0];
+
+  for (const number of numbers) {
+    if (min > number) {
+      min = number;
+    }
+  }
+
+  return min;
+}
+
+// console.log(findSmallestNumber(ex5));
+
+// --------------------
+
+// Задача 6
+
+// Напиши функцию calculateAverage()
+// которая принимает произвольное кол-во
+// аргументов и возвращает их среднее значение.
+// Все аругменты будут только числами.
+
+function calculateAverage() {
+  const args = arguments;
+  let sum = 0;
+  let totalCount = 0;
+
+  for (const arg of args) {
+    if (typeof arg !== "number") {
+      continue;
+    } else {
+      sum += arg;
+      totalCount++;
+      // totalCount += 1;
+    }
+  }
+
+  return sum / totalCount;
+}
+
+// console.log(calculateAverage(2, 5, 10, "asdhvghasd", [3, 3, 2]));
+
+// --------------------
+
+// Модуль 2. Занятие 2. Массивы и функции
+
+// Задача 7
+
+// Напиши функцнию findLongestWord(string)
+// которая принимает произвольную строку
+// состоящую только из слов разделённых
+// пробелом (параметр string)
+// и возвращает самое длинное слово в этой строке.
+
+// ДЗ - добавить проверку, когда все слова ровны
+
+function findLongestWord(randomWords) {
+  if (typeof randomWords !== "string") {
+    return;
+  }
+
+  const splittedWords = randomWords.split(" ");
+  let longestWord = splittedWords[0];
+
+  for (const word of splittedWords) {
+    if (longestWord.length < word.length) {
+      longestWord = word;
+    }
+  }
+
+  return longestWord;
+}
+
+// console.log(findLongestWord("Я хочу стать програмистом"));
+
+// ----------------------
+
+// Задача 8
+
+// Напишите функцию greet(name), которая
+// при вызове будет получать имя (например, «Василий»)
+// и логировать строку «Привет, <имя>».
+// В случае отсутствующего аргумента выводить «Привет, гость»
+
+function greet(name) {
+  if (typeof name !== "string") {
+    return "Привет, гость";
+  }
+
+  return name ? `Привет ${name}` : "Привет, гость";
+}
+
+// console.log(greet(""));
+
+// ----------------------
+
+// Задача 9
+
+// Напишите функцию findTheColor()
+// которая принимает название цвета
+// и определяет его наличие в масиве.
+// Аргумент должен быть строкой.
+
+// ДЗ от Жени - вывести индекс цвета в шаблонной строке
+
+const colors = ["red", "yellow", "blue", "green"];
+
+function findTheColor(colorName) {
+  if (typeof colorName !== "string") {
+    return;
+  }
+
+  return colors.includes(colorName);
+}
+
+// console.log(findTheColor("yellow"));
+
+// ----------------------
+
+// Задача 10
+
+// Выполните рефакторинг заменив объявление
+// функции на стрелочную функцию.
+
+// function checkNumbers(a, b) {
+//   if (a > b) {
+//     return `число ${a} больше ${b}`;
 //   }
-// } while (check);
 
-const x = "abb";
+//   return `число ${b} больше ${a}`;
+// }
 
-console.log(x.indexOf("b"));
+const checkNumbers = (a, b) => {
+  return a > b ? `число ${a} больше ${b}` : `число ${b} больше ${a}`;
+};
+
+// ----------------------
+
+// Задача 11
+
+// Выполните рефакторинг заменив объявление
+// функции на стрелочную функцию.
+
+// function mult(x, y, z) {
+//   return x * y * z;
+// }
+
+const mult = (x, y, z) => x * y * z;
+
+// ----------------------
+
+// Задача 12
+
+// Напишите функции для работы с коллекцией обучающих
+// курсов courses:
+
+// 1. addCourse(name) - добавляет курс в конец коллекции
+// 2. removeCourse(name) - удаляет курс из коллекции
+// 3. updateCourse(oldName, newName)- изменяет имя на новое
+
+const courses = ["HTML", "CSS", "JavaScript", "React"];
+
+const addCourse = name => courses.push(name);
+
+addCourse("C++");
+
+const removeCourse = name => {
+  const index = courses.indexOf(name);
+
+  if (index !== -1) {
+    courses.splice(index, 1);
+  }
+
+  return courses;
+};
+
+removeCourse("CSS");
+
+const updateCourse = (oldName, newName) => {
+  const index = courses.indexOf(oldName);
+
+  if (index !== -1) {
+    courses.splice(index, 1, newName);
+  }
+
+  return courses;
+};
+
+updateCourse("HTML", "Python");
+
+// console.log(courses);
