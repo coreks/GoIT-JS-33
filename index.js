@@ -1,290 +1,220 @@
-// 1) Напиши скрипт, который, для объекта user,
-// последовательно:
+// const a = {};
+// const b = { key: "b" };
+// const c = { key: "c" };
 
-// a. добавляет поле mood со значением 'happy'
-// b. заменяет значение hobby на 'skydiving'
-// c. заменяет значение premium на false
-// d. выводит содержимое объекта user в формате
-// ключ:значение
-// используя Object.keys() и for...of
+// a[c] = 1;
+// a[b] = 2;
 
-const user = {
-  name: "John",
-  age: 20,
-  hobby: "tennis",
-  premium: true
-};
+// console.log(a);
+// console.log(a[b]);
 
-function changeUser(obj) {
-  obj.mood = "happy";
-  obj.hobby = "skydiving";
-  obj.premium = false;
+/* 1. Напишите две функции:
 
-  for (const key of Object.keys(obj)) {
-    console.log(`${key}:${obj[key]}`);
+a. letMeSeeYourName(callback) - спрашивает имя пользователя 
+через prompt и вызывает 
+коллбек ф-цию callback
+b. greet(name) - коллбек принимающий имя и логирующий в 
+консоль строку "Привет" + name */
+
+function letMeSeeYourName(callback) {
+  // console.log(callback);
+  const name = prompt("Как вас зовут?");
+
+  if (name) {
+    callback(name);
   }
-
-  return obj;
 }
 
-// console.log(changeUser(user));
-
-// -----------------------
-
-// 2) У нас есть объект, в котором хранятся
-// зарплаты нашей команды.
-// Напишите код для суммирования всех зарплат
-// и сохраните результат в переменной sum.
-// Должно получиться 390.
-// Если объект salaries пуст, то результат должен быть 0.
-
-const salaries = {
-  John: 100,
-  Ann: 160,
-  Pete: 130
-};
-
-// console.log(typeof null);
-
-// falsy values - undefined, null, "", 0, NaN
-
-function sumSalaries(objSalaries) {
-  if (!objSalaries) return 0;
-  let sum = 0;
-
-  for (const value of Object.values(objSalaries)) {
-    sum += value;
-  }
-
-  return sum;
+function greet(name) {
+  console.log(`Привет ${name}`);
 }
 
-// console.log(sumSalaries(salaries));
+// letMeSeeYourName(greet);
 
-// -----------------------
+// -------------------------
 
-// 3) Напишите ф-цию calcTotalPrice(stones, stoneName),
-// которая принимает массив
-// обьектов и строку с названием камня.
-// Ф-ция считает и возвращает общую стоимость
-// камней с таким именем, ценой и количеством из
-// обьекта
+/* 2. Напишите две функции:
 
-const stones = [
-  { name: "Изумруд", price: 1300, quantity: 4 },
-  { name: "Бриллиант", price: 2700, quantity: 3 },
-  { name: "Сапфир", price: 400, quantity: 7 },
-  { name: "Щебень", price: 200, quantity: 2 },
-  { name: "Щебень", price: 200, quantity: 2 },
-  { name: "Щебень", price: 200, quantity: 2 }
-];
+a. makeProduct(name, price, callback) - принимает имя и 
+цену товара, а также колбек. 
+Функция создаёт обьект товара, добавляя ему уникальный 
+идентификатор в свойство id и
+ вызывает колбек передавая ему созданный обьект.
+b. showProduct(product) - коллбек принимающий обьект 
+продукта и логирующий его в консоль */
 
-function calcTotalPrice(stones, stoneName) {
-  let sum = 0;
-  for (const stone of stones) {
-    if (stone["name"] === stoneName) {
-      sum += stone["price"] * stone["quantity"];
-    }
-  }
+function makeProduct(name, price, callback) {
+  const product = { name, price };
+  product.id = Math.random();
 
-  return sum;
+  callback(product);
 }
 
-// console.log(calcTotalPrice(stones, "Щебень"));
-
-// -----------------------
-
-// 4) Создайте объект calculator (калькулятор)
-// с тремя методами:
-
-// a. read(a, b)- запрашивает два значения и
-// сохраняет их как свойства объекта.
-// b. sum() - возвращает сумму сохранённых значений.
-// c. mult() - перемножает сохранённые
-// значения и возвращает результат.
-
-const calculator = {
-  read(a, b) {
-    this.value1 = a;
-    this.value2 = b;
-  },
-  sum() {
-    return !this.value1 || !this.value2 ? false : this.value1 + this.value2;
-  },
-  mult() {
-    return !this.value1 || !this.value2 ? false : this.value1 * this.value2;
-  }
-};
-
-// calculator.read(5, 5);
-// console.log(calculator.sum());
-
-// -----------------------
-
-// 5) Напишите функцию, которая принимает
-// объект и возвращает
-// новый объект без указанного параметра
-
-// Ожидаемый результат - ({ a: 1, b: 2 }, 'b') => { a: 1 }
-
-const updateObj = (obj, ...removeKeys) => {
-  let newObj = { ...obj };
-
-  for (const key of removeKeys) {
-    delete newObj[key];
-  }
-
-  return newObj;
-};
-
-// console.log(updateObj({ a: 1, b: 2, c: 3 }, "b", "a"));
-
-// -----------------------
-
-// 6) Напишите функцию которая принимает
-// как параметр объект и формирует
-// объекты в новом масиве в формате [key, value]
-
-//---- Сделать тоже самое, но без Object.entries -----
-
-const objData = {
-  name: "John",
-  surName: "Stones",
-  age: 25,
-  hobby: "football",
-  merried: false
-};
-
-function changeObject(obj) {
-  const newObj = Object.entries(obj);
-  console.log(newObj);
+function showProduct(product) {
+  console.log({ product });
 }
 
-// changeObject(objData);
+// makeProduct("картошка", 150, showProduct);
 
-// -----------------------
+// ------------------------
 
-// 7) Напиши скрипт управления личным
-// кабинетом интернет банка.
-// Есть объект account в котором необходимо
-// реализовать методы для работы
-// с балансом и историей транзакций.
+/* 3. Выполните рефакторинг функции makeDishWithShef(shefName, dish) так, 
+чтобы не нужно было каждый раз передавать имя шефа. Напишите функцию 
+makeShef(shefName), 
+которая возвращает другую функцию makeDish(dish), 
+помнящую имя шефа при её вызове. */
 
-/*
- * Типов транзацкий всего два.
- * Можно положить либо снять деньги со счета.
- */
-const Transaction = {
-  DEPOSIT: "deposit",
-  WITHDRAW: "withdraw"
-};
+function makeShef(shefName) {
+  return function makeDish(dish) {
+    console.log(`${shefName} готовит ${dish}`);
+  };
+}
 
-let transactionID = 0;
+// const shef1 = makeShef("Игорь");
+// const shef2 = makeShef("Олег");
 
-/*
- * Каждая транзакция это объект со свойствами: id, type и amount
- */
+// shef1("суп");
+// shef1("пюре");
 
-const account = {
-  // Текущий баланс счета
-  balance: 0,
+// shef2("гречку");
 
-  // История транзакций
-  transactions: [],
+// -------------------------------
 
-  /*
-   * Метод создает и возвращает объект транзакции.
-   * Принимает сумму и тип транзакции.
-   */
-  createTransaction(type, amount) {
-    return {
-      id: ++transactionID,
-      type,
-      amount
-    };
-  },
+// 4. Исправьте ошибки чтобы код работал.
 
-  /*
-   * Метод отвечающий за добавление суммы к балансу.
-   * Принимает сумму транзакции.
-   * Вызывает createTransaction для создания объекта
-   * транзакции
-   * после чего добавляет его в историю транзакций
-   */
-  deposit(amount) {
-    this.balance += amount;
-    const transaction = this.createTransaction(Transaction.DEPOSIT, amount);
-    this.transactions.push(transaction);
-  },
-
-  /*
-   * Метод отвечающий за снятие суммы с баланса.
-   * Принимает сумму танзакции.
-   * Вызывает createTransaction для создания объекта
-   * транзакции
-   * после чего добавляет его в историю транзакций.
-   *
-   * Если amount больше чем текущий баланс, выводи
-   * сообщение
-   * о том, что снятие такой суммы не возможно,
-   *  недостаточно средств.
-   */
-  withdraw(amount) {
-    if (amount > this.balance) {
-      return "Недостаточно средств";
-    } else {
-      this.balance -= amount;
-      const transaction = this.createTransaction(Transaction.WITHDRAW, amount);
-      this.transactions.push(transaction);
-    }
-  },
-
-  /*
-   * Метод возвращает текущий баланс
-   */
-  getBalance() {
-    return this.balance;
-  },
-
-  /*
-   * Метод ищет и возвращает объект транзации по id
-   */
-  getTransactionDetails(id) {
-    for (const transaction of this.transactions) {
-      if (transaction["id"] === id) {
-        return transaction;
-      }
-    }
-  },
-
-  /*
-   * Метод возвращает количество средств
-   * определенного типа транзакции из всей истории
-   * транзакций
-   */
-  getTransactionTotal(type) {
-    let sum = 0;
-    for (const transaction of this.transactions) {
-      if (transaction["type"] === type) {
-        sum += transaction["amount"];
-      }
-    }
-
-    return sum;
+const product = {
+  price: 5000,
+  showPrice() {
+    console.log(this.price);
   }
 };
 
-account.deposit(3000);
-account.deposit(3000);
-account.deposit(3000);
-account.deposit(3000);
+// product.showPrice();
 
-account.withdraw(1000);
+// -------------------------------
 
-console.log(account.getBalance());
+// 5. Исправьте ошибки чтобы код работал.
 
-console.log(account.transactions);
+const product2 = {
+  price: 5000,
+  showPrice() {
+    console.log(this.price);
+  }
+};
 
-console.log(account.getTransactionDetails(1));
+function callAction(action) {
+  console.log(this);
+  action();
+}
 
-console.log(account.getTransactionTotal(Transaction.DEPOSIT));
+// callAction(product2.showPrice.bind(product2));
+
+//TODO: Написать тоже самое с apply/call
+
+// -------------------------------
+
+/* 6. Напишите функцию each(array, callback), которая первым 
+параметром принимает массив, а вторым - функцию, 
+которая применится к каждому 
+элементу массива. Функция each должна вернуть 
+новый массив, элементами 
+которого будут результаты вызова коллбека. */
+
+function each(array, clb) {
+  let newArr = [];
+
+  for (let i = 0; i < array.length; i++) {
+    newArr.push(clb(array[i]));
+  }
+
+  return newArr;
+}
+
+const arr = [2, 6, 87, 34, 567, 89];
+
+// console.log(each(arr, val => val * 2));
+
+// -------------------------------
+
+/* 7. Напишите функцию makeCounter(), которая возвращает 
+другую функцию, 
+которая считает и логирует количество своих вызовов. */
+
+const makeCounter = () => {
+  let counter = 0;
+  return () => (counter += 1);
+};
+
+const counter = makeCounter();
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+
+// -------------------------------
+
+/* 8. Напишите функцию savePassword(password) которая принимает 
+пароль 
+и возвращает внутреннюю функцию, которая принимает строку и 
+возвращает 
+буль true, если строка совпадает с сохраненным паролем и false 
+- если не совпадает. */
+
+const savePassword = pwd => {
+  return pwd2 => pwd === pwd2;
+};
+
+function savePassword2(pwd) {
+  return function checkPassword(pwd2) {
+    return pwd === pwd2;
+  };
+}
+
+const pwd1 = savePassword("aaa");
+
+console.log(pwd1("aaahhhh"));
+
+console.log(pwd1);
+
+// -------------------------------
+
+/* 9. Напишите функцию для хранения скидки. Функция возвращает 
+другую функцию,которая принимает сумму 
+покупки и возвращает финальную сумму с сохранённой скидкой. */
+
+function saveDiscount(discount) {
+  return function makeDiscount(sum) {
+    return sum - sum * (discount / 100);
+  };
+}
+
+const saveDiscount2 = discount => sum => sum - sum * (discount / 100);
+
+const discount50 = saveDiscount(50);
+
+const discount30 = saveDiscount2(30);
+
+console.log(discount50(1000));
+console.log(discount30(1000));
+
+// function saveDiscount(discount, sum){}
+
+function saveDiscount(discount) {
+  return function makeDiscount(sum) {
+    return sum - sum * (discount / 100);
+  };
+}
+
+// const x = () => {
+//   return 1;
+// };
+
+// const y = () => 2;
