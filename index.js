@@ -1,220 +1,256 @@
-// const a = {};
-// const b = { key: "b" };
-// const c = { key: "c" };
+/* 1. Напиши класс User для создания пользователя со 
+следующим свойствами:
 
-// a[c] = 1;
-// a[b] = 2;
+a. username - имя, строка
+b. age - возраст, число
+c. numberOfPosts - кол-во постов, число
+d. Класс ожидает 1 параметр - объект настроек с 
+одноимёнными свойствами.
 
-// console.log(a);
-// console.log(a[b]);
+Добавь метод getInfo(), который, возвращает строку: 
+Пользователю ${имя} ${возраст} лет и 
+у него ${кол-во постов} публикаций. */
 
-/* 1. Напишите две функции:
+const User = function (userObj) {
+  const { username, age, numberOfPosts } = userObj;
+  this.username = username;
+  this.age = age;
+  this.numberOfPosts = numberOfPosts;
 
-a. letMeSeeYourName(callback) - спрашивает имя пользователя 
-через prompt и вызывает 
-коллбек ф-цию callback
-b. greet(name) - коллбек принимающий имя и логирующий в 
-консоль строку "Привет" + name */
+  // this.getInfo = function () {
+  //   console.log(`Пользователю ${this.username} ${this.age} лет и
+  //   у него ${this.numberOfPosts} публикаций.`);
+  // };
+};
 
-function letMeSeeYourName(callback) {
-  // console.log(callback);
-  const name = prompt("Как вас зовут?");
+// console.log(User.prototype);
 
-  if (name) {
-    callback(name);
+User.prototype.getInfo = function () {
+  console.log(`Пользователю ${this.username} ${this.age} лет и
+    у него ${this.numberOfPosts} публикаций.`);
+};
+
+const user1 = new User({ username: "Игорь", age: 34, numberOfPosts: 10 });
+
+// console.log(user1);
+
+// user1.getInfo();
+// -----------------
+
+/* 2. Напиши класс Storage который создаёт объекты 
+для управления складом товаров. 
+При вызове будет получать один аргумент - начальный 
+массив товаров, и записывать его в свойство items.
+
+Добавь методы класса:
+
+a. getItems() - возвращает массив товаров.
+b. addItem(item) - получает новый товар и добавляет 
+его к текущим.
+c. removeItem(item) - получет товар и, если он есть, 
+удаляет его из текущих. */
+
+const Storage = function (itemsArr) {
+  this.items = itemsArr;
+};
+
+Storage.prototype.getItem = function () {
+  return this.items;
+};
+
+Storage.prototype.addItem = function (item) {
+  return this.items.push(item);
+};
+
+Storage.prototype.removeItem = function (item) {
+  const index = this.items.indexOf(item);
+
+  if (index !== -1) {
+    this.items.splice(index, 1);
+  }
+
+  return this.items;
+};
+
+const storage = new Storage(["Item1", "Item2", "Item3"]);
+
+// console.log(storage.getItem());
+
+// console.log(storage.addItem("Item4"));
+
+// console.log(storage.getItem());
+
+// console.log(storage.removeItem("Item2"));
+
+// console.log(storage.getItem());
+
+// -----------------
+
+/* 3. Напиши класс Client который создаёт объект 
+со свойствами login и email. 
+Объяви приватные свойства #login и #email, 
+доступ к которым сделай 
+через геттер и сеттер login и email. */
+
+class Client {
+  #login;
+  #email;
+
+  constructor(login, email) {
+    this.#email = email;
+    this.#login = login;
+  }
+
+  // get getClientData() {
+  //   return {
+  //     login: this.#login,
+  //     email: this.#email
+  //   };
+  // }
+
+  set changeEmail(newEmail) {
+    this.#email = newEmail;
   }
 }
 
-function greet(name) {
-  console.log(`Привет ${name}`);
-}
+const client = new Client("nickname", "test@test.ru");
 
-// letMeSeeYourName(greet);
+// console.log(client.getClientData);
 
-// -------------------------
+client.changeEmail = "test1@test1.com";
 
-/* 2. Напишите две функции:
+// console.log(client.getClientData);
 
-a. makeProduct(name, price, callback) - принимает имя и 
-цену товара, а также колбек. 
-Функция создаёт обьект товара, добавляя ему уникальный 
-идентификатор в свойство id и
- вызывает колбек передавая ему созданный обьект.
-b. showProduct(product) - коллбек принимающий обьект 
-продукта и логирующий его в консоль */
+// console.log(client);
 
-function makeProduct(name, price, callback) {
-  const product = { name, price };
-  product.id = Math.random();
+// -----------------
 
-  callback(product);
-}
+/* 4. Напиши класс Notes который управляет коллекцией 
+заметок в свойстве items. 
+Заметка это объект со свойствами text и priority. 
+Добавь классу статическое свойство Priority, 
+в котором будет храниться объект с приоритетами. 
 
-function showProduct(product) {
-  console.log({ product });
-}
+Добавь методы addNote(note), removeNote(text) и 
+updateNotePriority(text, newPriority). */
 
-// makeProduct("картошка", 150, showProduct);
+//TODO:updateNotePriority(text, newPriority) - дома
 
-// ------------------------
-
-/* 3. Выполните рефакторинг функции makeDishWithShef(shefName, dish) так, 
-чтобы не нужно было каждый раз передавать имя шефа. Напишите функцию 
-makeShef(shefName), 
-которая возвращает другую функцию makeDish(dish), 
-помнящую имя шефа при её вызове. */
-
-function makeShef(shefName) {
-  return function makeDish(dish) {
-    console.log(`${shefName} готовит ${dish}`);
-  };
-}
-
-// const shef1 = makeShef("Игорь");
-// const shef2 = makeShef("Олег");
-
-// shef1("суп");
-// shef1("пюре");
-
-// shef2("гречку");
-
-// -------------------------------
-
-// 4. Исправьте ошибки чтобы код работал.
-
-const product = {
-  price: 5000,
-  showPrice() {
-    console.log(this.price);
-  }
-};
-
-// product.showPrice();
-
-// -------------------------------
-
-// 5. Исправьте ошибки чтобы код работал.
-
-const product2 = {
-  price: 5000,
-  showPrice() {
-    console.log(this.price);
-  }
-};
-
-function callAction(action) {
-  console.log(this);
-  action();
-}
-
-// callAction(product2.showPrice.bind(product2));
-
-//TODO: Написать тоже самое с apply/call
-
-// -------------------------------
-
-/* 6. Напишите функцию each(array, callback), которая первым 
-параметром принимает массив, а вторым - функцию, 
-которая применится к каждому 
-элементу массива. Функция each должна вернуть 
-новый массив, элементами 
-которого будут результаты вызова коллбека. */
-
-function each(array, clb) {
-  let newArr = [];
-
-  for (let i = 0; i < array.length; i++) {
-    newArr.push(clb(array[i]));
+class Notes {
+  constructor() {
+    this.items = [];
   }
 
-  return newArr;
+  static Priority() {
+    return {
+      HIGH: "high",
+      LOW: "low"
+    };
+  }
+
+  addNote(note) {
+    return this.items.push(note);
+  }
+
+  removeNote(noteName) {
+    const index = this.items.findIndex(item => item.text === noteName);
+
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
+  }
 }
 
-const arr = [2, 6, 87, 34, 567, 89];
+const note1 = new Notes();
 
-// console.log(each(arr, val => val * 2));
+// note1.addNote({ text: "Note1", priority: Notes.Priority().LOW });
+// note1.addNote({ text: "Note2", priority: Notes.Priority().HIGH });
+// note1.addNote({ text: "Note3", priority: Notes.Priority().LOW });
 
-// -------------------------------
+// note1.removeNote("Note2");
 
-/* 7. Напишите функцию makeCounter(), которая возвращает 
-другую функцию, 
-которая считает и логирует количество своих вызовов. */
+// console.log(note1.items);
 
-const makeCounter = () => {
-  let counter = 0;
-  return () => (counter += 1);
+// -----------------
+
+/*
+  5. Создать класс Worker у которого есть 
+  свойства name, surname, age, position, salary.
+     У класса Worker есть метод getSalary.
+     Создать класс TopLevelWorker у которого есть 
+     свойство hierarchyLevel и который 
+     наследует класс Worker, добавляя метод getHierarchyLevel
+
+     Реализовать задачу с помощью ES5 прототипов и ES6 классов
+*/
+
+const HIERARCHY_LEVEL = {
+  TOP: "top",
+  BOTTOM: "bottom"
 };
 
-const counter = makeCounter();
-
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-// console.log(counter());
-
-// -------------------------------
-
-/* 8. Напишите функцию savePassword(password) которая принимает 
-пароль 
-и возвращает внутреннюю функцию, которая принимает строку и 
-возвращает 
-буль true, если строка совпадает с сохраненным паролем и false 
-- если не совпадает. */
-
-const savePassword = pwd => {
-  return pwd2 => pwd === pwd2;
+const workerObj = {
+  name: "Антон",
+  surname: "Ефимов",
+  age: 34,
+  position: "FE разработчик",
+  salary: 3000
 };
 
-function savePassword2(pwd) {
-  return function checkPassword(pwd2) {
-    return pwd === pwd2;
-  };
+// ES5
+
+const Worker = function (obj) {
+  const { name, surname, age, position, salary } = obj;
+
+  this.name = name;
+  this.surname = surname;
+  this.age = age;
+  this.position = position;
+  this.salary = salary;
+};
+
+Worker.prototype.getSalary = function () {
+  return this.salary;
+};
+
+const TopLevelWorker = function (obj, hierarchyLevel) {
+  Worker.call(this, obj);
+  this.hierarchyLevel = hierarchyLevel;
+};
+
+TopLevelWorker.prototype = Object.create(Worker.prototype);
+TopLevelWorker.prototype.constructor = TopLevelWorker;
+
+// const topLevelWorker1 = new TopLevelWorker(workerObj, HIERARCHY_LEVEL.TOP);
+// console.log(topLevelWorker1);
+// console.log(topLevelWorker1.getSalary());
+
+// ES6
+
+class Worker2 {
+  constructor(obj) {
+    const { name, surname, age, position, salary } = obj;
+
+    this.name = name;
+    this.surname = surname;
+    this.age = age;
+    this.position = position;
+    this.salary = salary;
+  }
+
+  getSalary() {
+    console.log(this.salary);
+  }
 }
 
-const pwd1 = savePassword("aaa");
-
-console.log(pwd1("aaahhhh"));
-
-console.log(pwd1);
-
-// -------------------------------
-
-/* 9. Напишите функцию для хранения скидки. Функция возвращает 
-другую функцию,которая принимает сумму 
-покупки и возвращает финальную сумму с сохранённой скидкой. */
-
-function saveDiscount(discount) {
-  return function makeDiscount(sum) {
-    return sum - sum * (discount / 100);
-  };
+class TopLevelWorker2 extends Worker2 {
+  constructor(obj, hierarchyLevel) {
+    super(obj);
+    this.hierarchyLevel = hierarchyLevel;
+  }
 }
 
-const saveDiscount2 = discount => sum => sum - sum * (discount / 100);
+const topLvlWorker = new TopLevelWorker2(workerObj, HIERARCHY_LEVEL.TOP);
 
-const discount50 = saveDiscount(50);
-
-const discount30 = saveDiscount2(30);
-
-console.log(discount50(1000));
-console.log(discount30(1000));
-
-// function saveDiscount(discount, sum){}
-
-function saveDiscount(discount) {
-  return function makeDiscount(sum) {
-    return sum - sum * (discount / 100);
-  };
-}
-
-// const x = () => {
-//   return 1;
-// };
-
-// const y = () => 2;
+console.log(topLvlWorker);
+topLvlWorker.getSalary();
