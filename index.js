@@ -1,256 +1,220 @@
-/* 1. Напиши класс User для создания пользователя со 
-следующим свойствами:
-
-a. username - имя, строка
-b. age - возраст, число
-c. numberOfPosts - кол-во постов, число
-d. Класс ожидает 1 параметр - объект настроек с 
-одноимёнными свойствами.
-
-Добавь метод getInfo(), который, возвращает строку: 
-Пользователю ${имя} ${возраст} лет и 
-у него ${кол-во постов} публикаций. */
-
-const User = function (userObj) {
-  const { username, age, numberOfPosts } = userObj;
-  this.username = username;
-  this.age = age;
-  this.numberOfPosts = numberOfPosts;
-
-  // this.getInfo = function () {
-  //   console.log(`Пользователю ${this.username} ${this.age} лет и
-  //   у него ${this.numberOfPosts} публикаций.`);
-  // };
-};
-
-// console.log(User.prototype);
-
-User.prototype.getInfo = function () {
-  console.log(`Пользователю ${this.username} ${this.age} лет и
-    у него ${this.numberOfPosts} публикаций.`);
-};
-
-const user1 = new User({ username: "Игорь", age: 34, numberOfPosts: 10 });
-
-// console.log(user1);
-
-// user1.getInfo();
-// -----------------
-
-/* 2. Напиши класс Storage который создаёт объекты 
-для управления складом товаров. 
-При вызове будет получать один аргумент - начальный 
-массив товаров, и записывать его в свойство items.
-
-Добавь методы класса:
-
-a. getItems() - возвращает массив товаров.
-b. addItem(item) - получает новый товар и добавляет 
-его к текущим.
-c. removeItem(item) - получет товар и, если он есть, 
-удаляет его из текущих. */
-
-const Storage = function (itemsArr) {
-  this.items = itemsArr;
-};
-
-Storage.prototype.getItem = function () {
-  return this.items;
-};
-
-Storage.prototype.addItem = function (item) {
-  return this.items.push(item);
-};
-
-Storage.prototype.removeItem = function (item) {
-  const index = this.items.indexOf(item);
-
-  if (index !== -1) {
-    this.items.splice(index, 1);
-  }
-
-  return this.items;
-};
-
-const storage = new Storage(["Item1", "Item2", "Item3"]);
-
-// console.log(storage.getItem());
-
-// console.log(storage.addItem("Item4"));
-
-// console.log(storage.getItem());
-
-// console.log(storage.removeItem("Item2"));
-
-// console.log(storage.getItem());
-
-// -----------------
-
-/* 3. Напиши класс Client который создаёт объект 
-со свойствами login и email. 
-Объяви приватные свойства #login и #email, 
-доступ к которым сделай 
-через геттер и сеттер login и email. */
-
-class Client {
-  #login;
-  #email;
-
-  constructor(login, email) {
-    this.#email = email;
-    this.#login = login;
-  }
-
-  // get getClientData() {
-  //   return {
-  //     login: this.#login,
-  //     email: this.#email
-  //   };
-  // }
-
-  set changeEmail(newEmail) {
-    this.#email = newEmail;
-  }
-}
-
-const client = new Client("nickname", "test@test.ru");
-
-// console.log(client.getClientData);
-
-client.changeEmail = "test1@test1.com";
-
-// console.log(client.getClientData);
-
-// console.log(client);
-
-// -----------------
-
-/* 4. Напиши класс Notes который управляет коллекцией 
-заметок в свойстве items. 
-Заметка это объект со свойствами text и priority. 
-Добавь классу статическое свойство Priority, 
-в котором будет храниться объект с приоритетами. 
-
-Добавь методы addNote(note), removeNote(text) и 
-updateNotePriority(text, newPriority). */
-
-//TODO:updateNotePriority(text, newPriority) - дома
-
-class Notes {
-  constructor() {
-    this.items = [];
-  }
-
-  static Priority() {
-    return {
-      HIGH: "high",
-      LOW: "low"
-    };
-  }
-
-  addNote(note) {
-    return this.items.push(note);
-  }
-
-  removeNote(noteName) {
-    const index = this.items.findIndex(item => item.text === noteName);
-
-    if (index !== -1) {
-      this.items.splice(index, 1);
-    }
-  }
-}
-
-const note1 = new Notes();
-
-// note1.addNote({ text: "Note1", priority: Notes.Priority().LOW });
-// note1.addNote({ text: "Note2", priority: Notes.Priority().HIGH });
-// note1.addNote({ text: "Note3", priority: Notes.Priority().LOW });
-
-// note1.removeNote("Note2");
-
-// console.log(note1.items);
-
-// -----------------
-
 /*
-  5. Создать класс Worker у которого есть 
-  свойства name, surname, age, position, salary.
-     У класса Worker есть метод getSalary.
-     Создать класс TopLevelWorker у которого есть 
-     свойство hierarchyLevel и который 
-     наследует класс Worker, добавляя метод getHierarchyLevel
-
-     Реализовать задачу с помощью ES5 прототипов и ES6 классов
+--- Сортировка примитивов ---
+1.Выполнить сортировку массива цен по убыванию и возрастанию.
 */
 
-const HIERARCHY_LEVEL = {
-  TOP: "top",
-  BOTTOM: "bottom"
-};
+const prices = [1000, 240, 670, 360, 89, 20];
 
-const workerObj = {
-  name: "Антон",
-  surname: "Ефимов",
-  age: 34,
-  position: "FE разработчик",
-  salary: 3000
-};
+// -1 1 0
 
-// ES5
+// prices.sort((a, b) => {
+//   return a - b;
+// });
 
-const Worker = function (obj) {
-  const { name, surname, age, position, salary } = obj;
+// prices.sort((a, b) => {
+//   return b - a;
+// });
 
-  this.name = name;
-  this.surname = surname;
-  this.age = age;
-  this.position = position;
-  this.salary = salary;
-};
+prices.sort((a, b) => b - a);
 
-Worker.prototype.getSalary = function () {
-  return this.salary;
-};
+// console.log(prices);
 
-const TopLevelWorker = function (obj, hierarchyLevel) {
-  Worker.call(this, obj);
-  this.hierarchyLevel = hierarchyLevel;
-};
+// -------------------
 
-TopLevelWorker.prototype = Object.create(Worker.prototype);
-TopLevelWorker.prototype.constructor = TopLevelWorker;
+/* 
+--- Сортировка строк ---
+2. Выполнить сортировку массива названий мониторов в алфавитном и 
+обратном 
+алфавитном порядке.
+*/
 
-// const topLevelWorker1 = new TopLevelWorker(workerObj, HIERARCHY_LEVEL.TOP);
-// console.log(topLevelWorker1);
-// console.log(topLevelWorker1.getSalary());
+const monitors = ["SAMSUNG", "LG", "ASUS", "DELL", "BENQ", "ACER"];
 
-// ES6
+// monitors.sort();
 
-class Worker2 {
-  constructor(obj) {
-    const { name, surname, age, position, salary } = obj;
+// monitors.sort((a, b) => {
+//   if (a < b) {
+//     return -1;
+//   }
+//   if (a > b) {
+//     return 1;
+//   }
 
-    this.name = name;
-    this.surname = surname;
-    this.age = age;
-    this.position = position;
-    this.salary = salary;
+//   return 0;
+// });
+
+monitors.sort((a, b) => {
+  if (a < b) {
+    return 1;
+  }
+  if (a > b) {
+    return -1;
   }
 
-  getSalary() {
-    console.log(this.salary);
+  return 0;
+});
+
+// console.log(monitors);
+
+// -------------------
+
+/*
+--- Сортировка сложных типов ---
+3. Выполнить сортировку массива объектов:
+
+a. по возрастанию и убыванию значения свойства price.
+b. по имени в алфавитном и обратном алфавитном порядке. 
+*/
+
+const items = [
+  { name: "SAMSUNG", price: 15000 },
+  { name: "LG", price: 9000 },
+  { name: "ASUS", price: 27000 },
+  { name: "DELL", price: 12000 },
+  { name: "BENQ", price: 7000 }
+];
+
+let itemsCopy = [...items];
+
+itemsCopy.sort((a, b) => {
+  return a.price - b.price;
+});
+
+// TODO: дописать остольные сортировки
+
+// console.log(itemsCopy);
+
+// -------------------
+
+/*
+--- Метод Array.prototype.flatMap ---
+4.Собрать в allTopics массив всех предметов всех 
+курсов используя flatMap.
+Используя Array.prototype.filter выполнить фильтрацию, 
+оставив в uniqueTopics только уникальные элементы.
+*/
+
+const courses = [
+  {
+    name: "Basic HTML+CSS",
+    topics: ["VSCode", "HTML", "CSS", "GitHub Desktop", "GitHub"]
+  },
+  {
+    name: "Intermediate HTML+CSS",
+    topics: ["VSCode", "Terminal", "Git", "GitHub", "HTML", "CSS"]
+  },
+  {
+    name: "Basic JavaScript",
+    topics: [
+      "VSCode",
+      "Type system",
+      "Loops",
+      "Functions",
+      "Conditions",
+      "Classes",
+      "DOM",
+      "Git",
+      "GitHub"
+    ]
+  },
+  {
+    name: "Intermediate JavaScript",
+    topics: [
+      "VSCode",
+      "NPM",
+      "Bundlers",
+      "Transpiling",
+      "Promises",
+      "AJAX",
+      "Git",
+      "GitHub"
+    ]
   }
-}
+];
 
-class TopLevelWorker2 extends Worker2 {
-  constructor(obj, hierarchyLevel) {
-    super(obj);
-    this.hierarchyLevel = hierarchyLevel;
+const allTopics = courses.flatMap(course => course.topics);
+
+// console.log(allTopics);
+
+const uniqueTopics = allTopics.filter((topic, index, self) => {
+  // console.log({ topic, index });
+  return self.indexOf(topic) === index;
+});
+
+// console.log(uniqueTopics.length);
+
+// -------------------
+
+/* 
+--- Чейнинг методов ---
+5. Выполнить рефакторинг используя цепочку методов flatMap и filter 
+*/
+
+const courseCopy = [...courses];
+
+const uniqueTopics2 = courseCopy
+  .flatMap(course => course.topics)
+  .filter((topic, index, self) => self.indexOf(topic) === index);
+
+// console.log(uniqueTopics2);
+
+// -------------------
+
+/* 
+--- Метод Array.prototype.map ---
+6. Используя функцию map назначить скидку 20% на фрукты в масиве, 
+назначить id для каждого продукта
+*/
+
+const fruits = [
+  { name: "apple", price: 200 },
+  { name: "orange", price: 300 },
+  { name: "grapes", price: 750 }
+];
+
+const discountFruits = fruits.map((fruit, index) => {
+  return { id: index + 1, name: fruit.name, price: fruit.price * 0.8 };
+});
+
+// console.log(discountFruits);
+
+// console.log(fruits);
+
+// -------------------
+
+/* 
+--- Метод Array.prototype.reduce ---
+7. Используя функцию reduce узнать общие годы практики в объекте workers
+*/
+
+const workers = [
+  {
+    id: 10,
+    name: "Poe Dameron",
+    years: 14
+  },
+  {
+    id: 2,
+    name: "Temmin 'Snap' Wexley",
+    years: 30
+  },
+  {
+    id: 41,
+    name: "Tallissan Lintra",
+    years: 16
+  },
+  {
+    id: 99,
+    name: "Ello Asty",
+    years: 22
   }
-}
+];
 
-const topLvlWorker = new TopLevelWorker2(workerObj, HIERARCHY_LEVEL.TOP);
+const sumYears = workers.reduce((acc, curVal) => {
+  console.log(acc);
+  return acc + curVal.years;
+}, 0);
 
-console.log(topLvlWorker);
-topLvlWorker.getSalary();
+// console.log(sumYears);
+
+// -------------------
