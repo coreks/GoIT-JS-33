@@ -1,220 +1,172 @@
-/*
---- Сортировка примитивов ---
-1.Выполнить сортировку массива цен по убыванию и возрастанию.
-*/
-
-const prices = [1000, 240, 670, 360, 89, 20];
-
-// -1 1 0
-
-// prices.sort((a, b) => {
-//   return a - b;
-// });
-
-// prices.sort((a, b) => {
-//   return b - a;
-// });
-
-prices.sort((a, b) => b - a);
-
-// console.log(prices);
-
-// -------------------
-
 /* 
---- Сортировка строк ---
-2. Выполнить сортировку массива названий мониторов в алфавитном и 
-обратном 
-алфавитном порядке.
+
+1. 
+- Создать маркированный список.
+- Создать кнопки 'добавить' и 'удалить',которые будут менять 
+  состав списка.
+
+- Bonus: четные - красным, нечетные синим
+
 */
 
-const monitors = ["SAMSUNG", "LG", "ASUS", "DELL", "BENQ", "ACER"];
+// const container = document.getElementById("container");
 
-// monitors.sort();
+// // Создать ul
 
-// monitors.sort((a, b) => {
-//   if (a < b) {
-//     return -1;
+// const ulList = document.createElement("ul");
+
+// // Создать input и кнопки
+
+// const formContainer = document.createElement("div");
+
+// const inputItem = document.createElement("input");
+// inputItem.style.display = "block";
+// inputItem.style.marginBottom = "10px";
+
+// const addBtn = document.createElement("button");
+// addBtn.textContent = "Добавить";
+// addBtn.style.marginRight = "5px";
+
+// const removeBtn = document.createElement("button");
+// removeBtn.textContent = "Удалить";
+
+// formContainer.append(inputItem, addBtn, removeBtn);
+
+// container.append(ulList, formContainer);
+
+// addBtn.addEventListener("click", e => {
+//   if (inputItem.value.trim()) {
+//     const liItem = document.createElement("li");
+//     liItem.textContent = inputItem.value;
+//     ulList.appendChild(liItem);
+//     const liCount = ulList.children.length;
+//     liItem.classList.add(liCount % 2 === 0 ? "even" : "odd");
+//     inputItem.value = "";
 //   }
-//   if (a > b) {
-//     return 1;
-//   }
-
-//   return 0;
 // });
 
-monitors.sort((a, b) => {
-  if (a < b) {
-    return 1;
-  }
-  if (a > b) {
-    return -1;
-  }
-
-  return 0;
-});
-
-// console.log(monitors);
-
-// -------------------
+// removeBtn.addEventListener("click", e => {
+//   if (ulList.hasChildNodes()) {
+//     ulList.removeChild(ulList.lastElementChild);
+//   }
+// });
 
 /*
---- Сортировка сложных типов ---
-3. Выполнить сортировку массива объектов:
 
-a. по возрастанию и убыванию значения свойства price.
-b. по имени в алфавитном и обратном алфавитном порядке. 
+2. В форме авторизации пользователь должен ввести 
+логин и пароль для входа в систему.
+  - кнопка 'Войти' становится активной только в том 
+    случае когда заполнены оба поля и пользователь отметил 
+    чекбокс
+  - поле логин должно содержать значение минимум 4 символа
+  - поле пароль от 8-30 символов
+  - если условия не соответствуют требованиям то 
+    при потере фокуса поле ввода показывает ошибку
+  - после нажатия кнопки Войти надо вывести сообщение 
+    об успешной авторизацие
+
 */
 
-const items = [
-  { name: "SAMSUNG", price: 15000 },
-  { name: "LG", price: 9000 },
-  { name: "ASUS", price: 27000 },
-  { name: "DELL", price: 12000 },
-  { name: "BENQ", price: 7000 }
-];
+// const loginInput = document.getElementById("login");
+// const passwordInput = document.getElementById("password");
+// const loginInfo = document.getElementById("loginInfo");
+// const passwordInfo = document.getElementById("passwordInfo");
+// const checkBox = document.getElementById("checkBox");
+// const submitBtn = document.getElementById("submitButton");
+// const msgBox = document.getElementById("msgBox");
 
-let itemsCopy = [...items];
+// loginInput.addEventListener("focus", e => {
+//   loginInfo.style.display = "block";
+// });
 
-itemsCopy.sort((a, b) => {
-  return a.price - b.price;
-});
+// loginInput.addEventListener("blur", e => {
+//   console.log(e.currentTarget.value);
+//   const val = e.currentTarget.value;
+//   if (val.length < 4) {
+//     e.currentTarget.classList.add("error");
+//   } else {
+//     if (e.currentTarget.classList.contains("error")) {
+//       e.currentTarget.classList.remove("error");
+//     }
+//   }
 
-// TODO: дописать остольные сортировки
+//   loginInfo.style.display = "none";
+// });
 
-// console.log(itemsCopy);
+// passwordInput.addEventListener("focus", e => {
+//   passwordInfo.style.display = "block";
+// });
 
-// -------------------
+// passwordInput.addEventListener("blur", e => {
+//   const val = e.currentTarget.value;
 
-/*
---- Метод Array.prototype.flatMap ---
-4.Собрать в allTopics массив всех предметов всех 
-курсов используя flatMap.
-Используя Array.prototype.filter выполнить фильтрацию, 
-оставив в uniqueTopics только уникальные элементы.
-*/
+//   if (val.length > 8 && val.length < 30) {
+//     if (e.currentTarget.classList.contains("error")) {
+//       e.currentTarget.classList.remove("error");
+//     }
+//   } else {
+//     e.currentTarget.classList.add("error");
+//   }
+//   passwordInfo.style.display = "none";
+// });
 
-const courses = [
-  {
-    name: "Basic HTML+CSS",
-    topics: ["VSCode", "HTML", "CSS", "GitHub Desktop", "GitHub"]
-  },
-  {
-    name: "Intermediate HTML+CSS",
-    topics: ["VSCode", "Terminal", "Git", "GitHub", "HTML", "CSS"]
-  },
-  {
-    name: "Basic JavaScript",
-    topics: [
-      "VSCode",
-      "Type system",
-      "Loops",
-      "Functions",
-      "Conditions",
-      "Classes",
-      "DOM",
-      "Git",
-      "GitHub"
-    ]
-  },
-  {
-    name: "Intermediate JavaScript",
-    topics: [
-      "VSCode",
-      "NPM",
-      "Bundlers",
-      "Transpiling",
-      "Promises",
-      "AJAX",
-      "Git",
-      "GitHub"
-    ]
-  }
-];
-
-const allTopics = courses.flatMap(course => course.topics);
-
-// console.log(allTopics);
-
-const uniqueTopics = allTopics.filter((topic, index, self) => {
-  // console.log({ topic, index });
-  return self.indexOf(topic) === index;
-});
-
-// console.log(uniqueTopics.length);
-
-// -------------------
+// submitBtn.addEventListener("click", e => {
+//   e.preventDefault();
+//   if (
+//     !loginInput.classList.contains("error") &&
+//     !passwordInput.classList.contains("error") &&
+//     checkBox.checked
+//   ) {
+//     msgBox.innerHTML = "Вы успешно авторизованы!";
+//     loginInput.value = "";
+//     passwordInput.value = "";
+//     checkBox.checked = false;
+//   }
+// });
 
 /* 
---- Чейнинг методов ---
-5. Выполнить рефакторинг используя цепочку методов flatMap и filter 
+
+3. Создать небольшую игру :)
+  - Изначально на экране пользователя будет отображаться какая 
+    нибудь форма (круг, квадрат, прямоугольник)
+  - при нажатии на нее в рандомном порядке форма должна 
+  менятся на другую
+  - форма каждый раз должна появляться в разных местах 
+  на странице
+  - цвет формы в рандомном порядке меняется, 
+    используя цвета из заранее заготовленного массива
+  
 */
 
-const courseCopy = [...courses];
+// const forms = [
+//   "width: 100px; height: 100px; border-width: 1px; border-color: #000000",
+//   "width: 100px; height: 100px; border-radius: 50%; border-width: 1px; border-color: #000000",
+//   "width: 150px; height: 100px; border-width: 1px; border-color: #000000"
+// ];
 
-const uniqueTopics2 = courseCopy
-  .flatMap(course => course.topics)
-  .filter((topic, index, self) => self.indexOf(topic) === index);
+// const colors = ["red", "blue", "green"];
 
-// console.log(uniqueTopics2);
+// const randomizer = max => {
+//   return Math.floor(Math.random() * max);
+// };
 
-// -------------------
+// const container = document.getElementById("container");
+// const form = document.createElement("div");
 
-/* 
---- Метод Array.prototype.map ---
-6. Используя функцию map назначить скидку 20% на фрукты в масиве, 
-назначить id для каждого продукта
-*/
+// container.append(form);
 
-const fruits = [
-  { name: "apple", price: 200 },
-  { name: "orange", price: 300 },
-  { name: "grapes", price: 750 }
-];
+// form.addEventListener("click", () => {
+//   generateForm();
+// });
 
-const discountFruits = fruits.map((fruit, index) => {
-  return { id: index + 1, name: fruit.name, price: fruit.price * 0.8 };
-});
+// const generateForm = () => {
+//   form.style.cssText = forms[randomizer(forms.length)];
+//   form.style.backgroundColor = colors[randomizer(colors.length)];
+//   form.style.position = "absolute";
+//   form.style.top = `${randomizer(100)}%`;
+//   form.style.left = `${randomizer(100)}%`;
+// };
 
-// console.log(discountFruits);
-
-// console.log(fruits);
-
-// -------------------
-
-/* 
---- Метод Array.prototype.reduce ---
-7. Используя функцию reduce узнать общие годы практики в объекте workers
-*/
-
-const workers = [
-  {
-    id: 10,
-    name: "Poe Dameron",
-    years: 14
-  },
-  {
-    id: 2,
-    name: "Temmin 'Snap' Wexley",
-    years: 30
-  },
-  {
-    id: 41,
-    name: "Tallissan Lintra",
-    years: 16
-  },
-  {
-    id: 99,
-    name: "Ello Asty",
-    years: 22
-  }
-];
-
-const sumYears = workers.reduce((acc, curVal) => {
-  console.log(acc);
-  return acc + curVal.years;
-}, 0);
-
-// console.log(sumYears);
-
-// -------------------
+// document.addEventListener("DOMContentLoaded", () => {
+//   generateForm();
+// });
