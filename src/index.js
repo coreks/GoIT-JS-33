@@ -1,7 +1,7 @@
 import "./styles/main.scss";
 import template from "./templates/main.hbs";
 import data from "./data/data.json";
-import {setLocalStarage}
+// import {setLocalStarage}
 
 let tmpUserNameState = "";
 
