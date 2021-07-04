@@ -1,12 +1,15 @@
 import "./styles/main.scss";
 import template from "./templates/main.hbs";
 import data from "./data/data.json";
-// import {setLocalStarage}
+import { setLocalStarage, getLocalStorage } from "./utils/utils.js";
 
 let tmpUserNameState = "";
 
 window.onload = () => {
   const container = document.getElementById("container");
+
+  getLocalStorage();
+
   container.innerHTML = template(data);
   const nameInput = document.getElementById("nameInput");
   const saveUser = document.getElementById("saveUser");
@@ -16,6 +19,6 @@ window.onload = () => {
   });
 
   saveUser.addEventListener("click", () => {
-    console.log(tmpUserNameState);
+    setLocalStarage(tmpUserNameState);
   });
 };
